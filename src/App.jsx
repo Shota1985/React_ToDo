@@ -19,7 +19,7 @@ function App() {
       })
     );
   }
-  function removeTodo (params) {
+  function removeTodo (id) {setTodos(todos.filter(todo => todo.id !== id))
     
   }
   return (
@@ -33,7 +33,7 @@ function App() {
               return (
                 <li className={todo.done ? 'todo done' : "todo"} key={todo.id} onClick={() => toglleTodo(todo.id)}>
                   {todo.text}
-                  <img src="./Delete.png" alt="Delete" className="delete" onClick={}/>
+                  <img src="./Delete.png" alt="Delete" className="delete" onClick={evt => {evt.stopPropagation}}/>
                 </li>
               );
             })}
