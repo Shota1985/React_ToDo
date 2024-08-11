@@ -1,9 +1,11 @@
 import { useState } from "react";
 import TaskInput from "./components/TaskInput/TaskInput.jsx";
 import "./App.css";
+import TaskItem from "./components/TaskItem/TaskItem.jsx";
 
 function App() {
   const [todos, setTodos] = useState([]);
+
   function putTodo(value) {
     if (value) {
       setTodos([...todos, { id: Date.now(), text: value, done: false }]);
@@ -15,12 +17,23 @@ function App() {
     setTodos(
       todos.map((todo) => {
         if (todo.id !== id) return todo;
-        return {...todo, done: !todo.done}
+        return { ...todo, done: !todo.done };
       })
     );
   }
-  function removeTodo (id) {setTodos(todos.filter(todo => todo.id !== id))
-    
+  function removeTodo(id) {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  }
+  function clearTodos() {
+    setTodos([]);
+  }
+  //completeTodos dose not work!!!
+  function completeTodos() {
+    setTodos(
+      todos.filter((todo) => {
+        if (todo == todo.done) return { ...todo, done: todo.done };
+      })
+    );
   }
   return (
     <>
@@ -31,12 +44,25 @@ function App() {
           <ol className="todo__tasks" type="I">
             {todos.map((todo) => {
               return (
-                <li className={todo.done ? 'todo done' : "todo"} key={todo.id} onClick={() => toglleTodo(todo.id)}>
-                  {todo.text}
-                  <img src="./Delete.png" alt="Delete" className="delete" onClick={evt => {evt.stopPropagation}}/>
-                </li>
+                <TaskItem
+                  todo={todo}
+                  key={todo.id}
+                  toglleTodo={toglleTodo}
+                  removeTodo={removeTodo}
+                />
               );
             })}
+            <div className="info">
+              <p>All todos: {todos.length}</p>
+
+              <span>
+                Complete:
+                {completeTodos}
+              </span>
+            </div>
+            <button className="clear" onClick={clearTodos}>
+              Clear All
+            </button>
           </ol>
         </div>
       </div>

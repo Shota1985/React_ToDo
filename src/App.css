@@ -34,20 +34,29 @@
   border-radius: 10px;
   margin: 10px;
   cursor: pointer;
-  position: relative;
 }
 
 .todo:hover {
   border-color: #a795c0;
 }
 .done {text-decoration: line-through;}
-.input {
-  outline: none;
-  font-weight: bold;
-  margin-top: 20px;
-  padding-left: 10px;
-  width: 475px;
-  height: 40px;
-  border-color: #7b609e;
-  border-radius: 10px;
+.delete{padding-right: 10px;}
+.info{margin: 20px ;}
+.clear{width: 120px;
+height: 40px;
+margin: 10px;}
+
+.add__btn {
+  position: absolute;
+  top: 14px;
+  right: -3px;
+  background-color: transparent;
+  font-size: 30px;
+  color: rgb(255, 255, 255, 0.5);
+  width: 45px;
+  height: 45px;
+}
+.add__btn:hover{outline: none ;}
+.input__form {
+  position: relative;
 }
