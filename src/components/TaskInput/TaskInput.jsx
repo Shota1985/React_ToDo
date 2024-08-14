@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './TaskInput.module.scss';
+import { jsxs } from "react/jsx-runtime";
 
 function taskInput(props) {
   const [value, setValue] = useState("");
+  
   return (
     <form className="input__form"
       onSubmit={(e) => {

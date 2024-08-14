@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TaskInput from "./components/TaskInput/TaskInput.jsx";
 import "./App.css";
 import TaskItem from "./components/TaskItem/TaskItem.jsx";
+import TaskControls from "./components/TaskControls/TaskControls.jsx";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  
+  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('items')) || []);
+  
+useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(todos));
+  }, [todos]);
 
   function putTodo(value) {
     if (value) {
-      setTodos([...todos, { id: Date.now(), text: value, done: false }]);
+      setTodos([
+        ...todos,
+        { id: Date.now(), text: value, done: false, redact: false },
+      ]);
     } else {
       alert("Введите текст");
     }
@@ -27,13 +36,9 @@ function App() {
   function clearTodos() {
     setTodos([]);
   }
-  //completeTodos dose not work!!!
-  function completeTodos() {
-    setTodos(
-      todos.filter((todo) => {
-        if (todo == todo.done) return { ...todo, done: todo.done };
-      })
-    );
+  function clearDoneTodos() {
+    const doneTasks = todos.filter((e) => !e.done);
+    setTodos(doneTasks);
   }
   return (
     <>
@@ -57,12 +62,15 @@ function App() {
 
               <span>
                 Complete:
-                {completeTodos}
+                {todos.filter((e) => e.done).length}
               </span>
             </div>
-            <button className="clear" onClick={clearTodos}>
-              Clear All
-            </button>
+            <div className="delete__btns">
+              <button className="clear" onClick={clearTodos}>
+                Clear All
+              </button>
+              <TaskControls clearDoneTodos={clearDoneTodos} />
+            </div>
           </ol>
         </div>
       </div>

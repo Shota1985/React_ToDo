@@ -10,7 +10,7 @@ function TaskItem({todo, toglleTodo, removeTodo}) {
       }}
     >
       {todo.text}
-      <img
+      <div><img
         src={todo.done ? "./Checked.png" : "./Check.png"}
         onClick={(e) => {
           toglleTodo(todo.id);
@@ -26,7 +26,8 @@ function TaskItem({todo, toglleTodo, removeTodo}) {
           evt.stopPropagation();
           removeTodo(todo.id);
         }}
-      />
+        />
+        <img src="./redact.png" alt="redact" className='redact' onClick={(evt) => { evt.stopPropagation(); }}/></div>
     </li>
   );
 }

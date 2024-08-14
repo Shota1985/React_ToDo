@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
-function TaskControls() {
-  return (
-    <div>TaskControls</div>
-  )
+function TaskControls({ clearDoneTodos}) {
+  
+
+  return <button onClick={clearDoneTodos} className="clear">Clear Done Tasks</button>;
 }
 
-export default TaskControls
+export default TaskControls;

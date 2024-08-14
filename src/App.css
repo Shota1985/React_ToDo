@@ -46,7 +46,7 @@
 height: 40px;
 margin: 10px;}
 
-.add__btn {
+.add__btn {outline: none;
   position: absolute;
   top: 14px;
   right: -3px;
@@ -56,7 +56,11 @@ margin: 10px;}
   width: 45px;
   height: 45px;
 }
+
 .add__btn:hover{outline: none ;}
 .input__form {
   position: relative;
 }
+.delete__btns{width: 469px;
+  display: flex; justify-content: space-between;}
+  
